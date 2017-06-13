@@ -8,6 +8,8 @@
 from enum import Enum
 import time
 
+from common.dict_json import saveConfig
+
 
 class DATATYPE(Enum):
     file = 1
@@ -19,7 +21,7 @@ class DATATYPE(Enum):
     #todo 枚举中添加其他类型
 
 
-class Config():
+class ConfigItem():
     """
     id:任务id
     name:任务名称
@@ -55,8 +57,34 @@ class Config():
         )
         return d
 
+class Config():
+    #配置文件类
+    def __init__(self):
+        self.configs = []
+        self.num = 0
+
+    def addConfigItem(self,configItem):
+        #添加配置项
+        self.configs.append(configItem)
+
+    def delConfigItem(self,id):
+        #删除配置项
+        for i in self.configs:
+            if i.id == id:
+                self.configs.remove(i)
+                return True
+            else:
+                return False
+
+    def save(self):
+        l = []
+        for i in self.configs:
+            l.append(i.to_dict())
+        saveConfig(l)
 
 
 if __name__ == '__main__':
-    conf = Config()
-    print(conf.id)
+    conf = ConfigItem()
+    c = Config()
+    c.addConfigItem(conf)
+    c.save()
