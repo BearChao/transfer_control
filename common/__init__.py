@@ -5,5 +5,8 @@
 # @Site    : http://blog.nickzy.com
 # @File    : __init__.py.py
 # @Software: PyCharm
+from common import logger
 
 CONFIGFILE = "config.json"
+LOGS = logger.Logger("Sender")
+LOGR = logger.Logger("Receiver")

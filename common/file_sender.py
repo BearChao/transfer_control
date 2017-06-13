@@ -10,6 +10,8 @@
 负责执行发送文件模块
 """
 import subprocess
+import logging
+
 
 def sendFile(fileName):
     #传入文件名，将文件发送到接收端
@@ -18,6 +20,7 @@ def sendFile(fileName):
     command.append(fileName)
     result = subprocess.call(command)
     if result == 0:
+        logging.log(logging.INFO,'文件发送完毕：'+fileName)
         return True
     else:
         return False

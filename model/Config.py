@@ -81,6 +81,8 @@ class Config():
         for i in self.configs:
             if i.id == id:
                 return self.configs[i]
+            else:
+                return None
 
     def getNum(self):
         return len(self.configs)
