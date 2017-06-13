@@ -7,6 +7,6 @@
 # @Software: PyCharm
 from common import logger
 
-CONFIGFILE = "config.json"
+CONFIGFILE = "conf/config.json"
 LOGS = logger.Logger("Sender")
 LOGR = logger.Logger("Receiver")

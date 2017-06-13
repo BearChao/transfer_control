@@ -34,7 +34,7 @@ class ConfigItem():
         if id is None:
             self.id = int(time.strftime("%Y%m%d%H%M%S", time.localtime()))
         else:
-            self.id = id
+            self.id = int(id)
         self.name = name
         self.dataType = dataType
         self.dir = dir
@@ -80,7 +80,7 @@ class Config():
     def getConfigItem(self,id):
         for i in self.configs:
             if i.id == id:
-                return self.configs[i]
+                return i
             else:
                 return None
 

@@ -9,12 +9,24 @@ import sys
 
 from common import LOGS
 from common.file_sender import sendFile
-
+from model.Config import Config
 
 
 def run(id):
-    LOGS.info('开始任务：'+str(id))
-    sendFile("ls")
+    #解析任务
+    conf = Config()
+    conf.load()
+    task = conf.getConfigItem(id)
+    if task is None:
+        LOGS.error('找不到对应任务：'+str(id))
+        exit(-1)
+    LOGS.info('开始任务：' + str(id)+":"+task.name)
+
+    #获取文件
+
+
+    #发送文件
+    #sendFile("ls")
 
 if __name__ == '__main__':
 
@@ -22,5 +34,5 @@ if __name__ == '__main__':
         id = int(sys.argv[1])
         run(id)
     else:
-        LOGS.error('参数错误,未提供任务id' )
+        LOGS.error('参数错误,未提供任务id')
         exit(-1)

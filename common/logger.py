@@ -19,13 +19,12 @@ class Logger:
     def __init__(self, name):
         logger_name = name
         self.logger = logging.getLogger(logger_name)
-        self.logger.setLevel(logging.INFO)
+        self.logger.setLevel(logging.DEBUG)
 
         # create file handler
         file = time.strftime('%Y-%m-%d', time.localtime(time.time()))
         log_path = "log/" + file + ".log"
         fh = logging.FileHandler(log_path)
-        fh.setLevel(logging.WARN)
 
         # create formatter
         fmt = "%(asctime)s %(levelname)s %(name)s: %(message)s"
