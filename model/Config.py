@@ -7,8 +7,7 @@
 # @Software: PyCharm
 from enum import Enum
 import time
-
-from common.dict_json import saveConfig
+import common.dict_json
 
 
 class DATATYPE(Enum):
@@ -31,8 +30,11 @@ class ConfigItem():
     password：登录密码
 
     """
-    def __init__(self,name='',dataType=DATATYPE.file,dir='',username='',password=''):
-        self.id = int(time.strftime("%Y%m%d%H%M%S", time.localtime()))
+    def __init__(self,name='',dataType=DATATYPE.file,dir='',username='',password='',id=None):
+        if id is None:
+            self.id = int(time.strftime("%Y%m%d%H%M%S", time.localtime()))
+        else:
+            self.id = id
         self.name = name
         self.dataType = dataType
         self.dir = dir
@@ -61,7 +63,6 @@ class Config():
     #配置文件类
     def __init__(self):
         self.configs = []
-        self.num = 0
 
     def addConfigItem(self,configItem):
         #添加配置项
@@ -76,15 +77,33 @@ class Config():
             else:
                 return False
 
+    def getConfigItem(self,id):
+        for i in self.configs:
+            if i.id == id:
+                return self.configs[i]
+
+    def getNum(self):
+        return len(self.configs)
+
     def save(self):
         l = []
         for i in self.configs:
             l.append(i.to_dict())
-        saveConfig(l)
+        common.dict_json.saveConfig(l)
 
+    def load(self):
+        self.__init__()
+        result = common.dict_json.loadConfig()
+        for i in result:
+            item = ConfigItem(id=i['id'],name=i['name'],dataType=i['dataType'],dir=i['dir'],username=i['username'],password=i['password'])
+            self.configs.append(item)
 
 if __name__ == '__main__':
     conf = ConfigItem()
     c = Config()
-    c.addConfigItem(conf)
-    c.save()
+    # c.addConfigItem(conf)
+    # c.addConfigItem(conf)
+    # c.addConfigItem(conf)
+    # c.save()
+    c.load()
+    print(c.getNum())
