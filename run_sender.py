@@ -9,6 +9,7 @@ import sys
 
 from common import LOGS
 from common.file_sender import sendFile
+from get_data.call_func import getDataFile
 from model.Config import Config
 
 
@@ -22,11 +23,14 @@ def run(id):
         exit(-1)
     LOGS.info('开始任务：' + str(id)+":"+task.name)
 
-    #获取文件
-
+    #todo 获取文件
+    files = getDataFile(task)
 
     #发送文件
+    for f in files:
+        print("send:"+f)
     #sendFile("ls")
+    LOGS.info('文件发送完成')
 
 if __name__ == '__main__':
 

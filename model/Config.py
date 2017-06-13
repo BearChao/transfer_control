@@ -11,12 +11,12 @@ import common.dict_json
 
 
 class DATATYPE(Enum):
-    file = 1
-    ftp = 2
-    webDav = 3
+    FILE = 1
+    FTP = 2
+    WEBDAV = 3
     #>10则为数据库类型
-    mysql = 11
-    oracle = 12
+    MYSQL = 11
+    ORACLE = 12
     #todo 枚举中添加其他类型
 
 
@@ -30,7 +30,7 @@ class ConfigItem():
     password：登录密码
 
     """
-    def __init__(self,name='',dataType=DATATYPE.file,dir='',username='',password='',id=None):
+    def __init__(self, name='', dataType=DATATYPE.FILE, dir='', username='', password='', id=None):
         if id is None:
             self.id = int(time.strftime("%Y%m%d%H%M%S", time.localtime()))
         else:
