@@ -30,7 +30,7 @@ class ConfigItem():
     password：登录密码
 
     """
-    def __init__(self, name='', dataType=DATATYPE.FILE, dir='', username='', password='', id=None):
+    def __init__(self, name='', dataType=DATATYPE.FILE, dir='', username='', password='', id=None, target='',port=0):
         if id is None:
             self.id = int(time.strftime("%Y%m%d%H%M%S", time.localtime()))
         else:
@@ -40,6 +40,8 @@ class ConfigItem():
         self.dir = dir
         self.username = username
         self.password = password
+        self.target = target
+        self.port = port
 
 
     def isDatabase(self):
@@ -55,7 +57,9 @@ class ConfigItem():
             dataType = self.dataType.value,
             dir = self.dir,
             username = self.username,
-            password = self.password
+            password = self.password,
+            target = self.target,
+            port = self.port
         )
         return d
 
@@ -97,7 +101,8 @@ class Config():
         self.__init__()
         result = common.dict_json.loadConfig()
         for i in result:
-            item = ConfigItem(id=i['id'],name=i['name'],dataType=i['dataType'],dir=i['dir'],username=i['username'],password=i['password'])
+            item = ConfigItem(id=i['id'], name=i['name'], dataType=i['dataType'], dir=i['dir'], username=i['username'], password=i['password'],
+                              target= i['target'], port = i['port'])
             self.configs.append(item)
 
 if __name__ == '__main__':
